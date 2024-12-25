@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaInsight</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        .testimonial {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .testimonial .author {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PharmaInsight</h1>
+        <p>Your guide to the world of pharmacy</p>
+    </header>
+    <div class="container">
+        <!-- Home Page -->
+        <section>
+            <h2>Introduction</h2>
+            <p>PharmaInsight is a company that serves you as a guide to the world of pharmacy. We offer detailed information about where the drug you need is located close to you, easing the process of finding it.</p>
+        </section>
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="drug-search" placeholder="Enter drug name...">
+            <button onclick="searchDrug()">Search</button>
+        </div>
+        <!-- How It Works -->
+        <section>
+            <h2>How It Works</h2>
+            <img src="how-it-works.png" alt="How it works" style="width:100%;">
+        </section>
+        <!-- Testimonials -->
+        <section>
+            <h2>Testimonials</h2>
+            <div class="testimonial">
+                <p>“I cannot express enough gratitude to Pharmainsight for simplifying my life. As a person who requires constant medication, I can say that it was very hard to spend many hours calling pharmacies or driving the city in search of specific drug I needed. With Pharmainsight I find the exact location of my drug literally in seconds. It is a game changer for me.”</p>
+                <p class="author">Emily Parker - Austin, Texas</p>
+            </div>
+            <div class="testimonial">
+                <p>“Pharminsight totally changed my perception of buying pharmaceuticals. This winter I needed to buy a drug for my sick daughter, and even the thought of driving through all this snowstorm was terrible. Thanks to Pharmainsight, I instantly found the drugs from near pharmacies and ordered a delivery. I did not waste any valuable time and my daughter went fine. Service is a must for mothers all over the world.”</p>
+                <p class="author">Michael Johnson - Chicago, Illinois</p>
+            </div>
+            <div class="testimonial">
+                <p>“I am a healthcare professional, and I recommend Pharmainsight to all my patients. Many of them struggle to find the right medications, which delay the right treatment. Sometimes the pharmacists replace the drugs I prescribe, and it is not always an equal replacement. I am glad that today my patients have the opportunity to quickly find quality drugs. It influences the course of the disease and recovery.”</p>
+                <p class="author">Ava Martinez, M.D., Ph.D. - San Francisco, California</p>
+            </div>
+        </section>
+    </div>
+    <!-- Search Results Page -->
+    <div class="container">
+        <section id="search-results" style="display:none;">
+            <h2>Search Results</h2>
+            <div class="map-container" id="map"></div>
+            <div id="pharmacy-list">
+                <h3>Available Drugs</h3>
+                <!-- Example Pharmacy -->
+                <div class="pharmacy">
+                    <p><strong>PharmaPlus Pharmacy</strong></p>
+                    <p>Address: 555 Market Street, San Francisco, CA 94105, USA</p>
+                    <p>Quantity: 10 packs</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- About Us Page -->
+    <div class="container">
+        <section>
+            <h2>About Us</h2>
+            <p>Company Information: Background on Pharmainsight and its founder, Michael Kutuzov.</p>
+            <p>We want to offer the pharmaceutical market a new service – finding drugs in the pharmacy nearby. The pain point of my customers is that not all the prescribed or needed drugs can be found in any pharmacy. Many customers must go through long trips searching for the medicines they need. It is frustrating when doctors prescribe a long list of drugs and people spend long time collecting in different pharmacies in the city. In our company, we facilitate trade between the pharmacy stores and buyers.</p>
+        </section>
+    </div>
+    <!-- Blog Page -->
+    <div class="container">
+        <section>
+            <h2>Blog</h2>
+            <p><strong>Question:</strong> Have you ever faced challenges in finding your prescribed medications at local pharmacies, especially during bad weather, when time is tight or when you feel yourself bad? Share your experiences and thoughts on how our service Pharmainsight, which provides real-time information on drug availability at nearby pharmacies, could make a difference in your life!</p>
+            <div id="blog-posts">
+                <!-- Blog posts can be dynamically loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function searchDrug() {
+            var query = document.getElementById('drug-search').value;
+            var resultsSection = document.getElementById('search-results');
+            var mapContainer = document.getElementById('map');
+            resultsSection.style.display = 'block';
+            // Initialize and add the map
+            function initMap() {
+                var pharmacyLocation = {lat: 37.7749, lng: -122.4194}; // Example coordinates for San Francisco
+                var map = new google.maps.Map(mapContainer, {
+                    zoom: 12,
+                    center: pharmacyLocation
+                });
+                var marker = new google.maps.Marker({
+                    position: pharmacyLocation,
+                    map: map
+                });
+            }
+            initMap();
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</body>
+</html>
